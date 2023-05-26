@@ -1,0 +1,32 @@
+import unittest
+from flask import Flask
+from flask.testing import FlaskClient
+from app import app
+
+class CurrencyConverterTests(unittest.TestCase):
+
+    def setUp(self):
+        self.app = app.test_client()
+        self.app.testing = True
+
+    def test_conversion(self):
+        response = self.app.post('/', data=dict(amount='100', base_currency='USD', target_currency='EUR'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p>Конвертированная сумма: 90.0</p>', response.get_data(as_text=True))
+
+    def test_invalid_currency(self):
+        response = self.app.post('/', data=dict(amount='100', base_currency='USD', target_currency='XYZ'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Invalid currency', response.data)
+
+    def test_zero_amount(self):
+        response = self.app.post('/', data=dict(amount='0', base_currency='USD', target_currency='EUR'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p>Конвертированная сумма: 0.0</p>', response.get_data(as_text=True))
+
+    def test_valid_conversion(self):
+        response = self.app.post('/', data=dict(amount='100', base_currency='USD', target_currency='USD'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('<p>Конвертированная сумма: 100.0</p>', response.get_data(as_text=True))
+if __name__ == '__main__':
+    unittest.main()

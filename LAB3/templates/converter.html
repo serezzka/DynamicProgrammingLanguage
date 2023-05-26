@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Конвертер валют</title>
+</head>
+<body>
+    <h1>Конвертер валют</h1>
+    <form method="POST" action="/">
+        <label for="amount">Сумма:</label>
+        <input type="text" id="amount" name="amount" required><br><br>
+        
+        <label for="base_currency">Базовая валюта:</label>
+        <select id="base_currency" name="base_currency" required>
+            <option value="USD">USD (Доллар США)</option>
+            <option value="EUR">EUR (Евро)</option>
+            <option value="GBP">GBP (Фунт стерлингов)</option>
+            <option value="JPY">JPY (Японская иена)</option>
+            <option value="RUB">RUB (Российский рубль)</option>
+            <option value="KZT">KZT (Казахстанский тенге)</option>
+            <option value="AUD">AUD (Австралийский доллар)</option>
+            <option value="NOK">NOK (Норвежская крона)</option>
+        </select><br><br>
+        
+        <label for="target_currency">Целевая валюта:</label>
+        <select id="target_currency" name="target_currency" required>
+            <option value="USD">USD (Доллар США)</option>
+            <option value="EUR">EUR (Евро)</option>
+            <option value="GBP">GBP (Фунт стерлингов)</option>
+            <option value="JPY">JPY (Японская иена)</option>
+            <option value="RUB">RUB (Российский рубль)</option>
+            <option value="KZT">KZT (Казахстанский тенге)</option>
+            <option value="AUD">AUD (Австралийский доллар)</option>
+            <option value="NOK">NOK (Норвежская крона)</option>
+        </select><br><br>
+        
+        <input type="submit" value="Конвертировать">
+    </form>
+</body>
+</html>
